@@ -1,0 +1,32 @@
+<application>
+  <component name="AppStorage">
+    <option name="newTranslationDialogX" value="754" />
+    <option name="newTranslationDialogY" value="505" />
+    <option name="pinTranslationDialog" value="true" />
+    <histories>
+      <item value="announce" />
+      <item value="발표하다" />
+      <item value="등록하다" />
+      <item value="concise" />
+      <item value="ATTEMPTS" />
+      <item value="상황" />
+      <item value="접두사" />
+      <item value="접미사" />
+      <item value="location" />
+      <item value="건너다" />
+      <item value="발판" />
+      <item value="현재위치" />
+      <item value="죽은" />
+      <item value="이동" />
+    </histories>
+    <option name="languageScores">
+      <map>
+        <entry key="ENGLISH" value="15" />
+        <entry key="KOREAN" value="16" />
+      </map>
+    </option>
+  </component>
+  <component name="Cache">
+    <option name="lastTrimTime" value="1669872228476" />
+  </component>
+</application>

@@ -1,0 +1,101 @@
+<templateSet group="Java">
+  <template name="tdd" value="@Test&#10;@DisplayName(&quot;$TEST_NAME$&quot;)&#10;void $METHOD_NAME$() {&#10;    //given&#10;    &#10;    //when&#10;    &#10;    //then&#10;    &#10;}" description="테스트 코드 기본 탬플릿" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="TEST_NAME" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="brpsvm" value="public static void main(String[] args) throws IOException {&#10;    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&#10;    int N = Integer.parseInt(br.readLine());&#10;    $END$&#10;}" description="BufferedReader 포함 psvm" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="scpsvm" value="public static void main(String[] args){&#10;    Scanner sc = new Scanner(System.in);&#10;    int N = sc.nextInt();&#10;    $END$&#10;}" description="Scanner 포함 psvm" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="stpsvm" value="public static void main(String[] args) throws IOException {&#10;    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&#10;    StringBuilder sb = new StringBuilder();&#10;    StringTokenizer st = new StringTokenizer(br.readLine());&#10;    int N = Integer.parseInt(st.nextToken());&#10;    $END$&#10;}" description="BufferedReader와 StringTokenizer 한줄에 숫자 여러개 일때 쓰는용" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="prmap" value="public void $PRINT_MAP$($MAP_TYPE$ $MAP$) {&#10;    for ($ELEMENT_TYPE$ $ARR$ : $MAP$) {&#10;        for ($ELEMENT_T$ $VAR$ : $ARR$) {&#10;            System.out.print($VAR$ + &quot; &quot;);&#10;        }&#10;        System.out.println();&#10;    }&#10;    System.out.println();&#10;}" description="2차원 배열 출력할때 사용 (특히, 그래프 탐색)" toReformat="false" toShortenFQNames="true">
+    <variable name="PRINT_MAP" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="MAP_TYPE" expression="methodParameterTypes()" defaultValue="int[][]" alwaysStopAt="false" />
+    <variable name="MAP" expression="methodParameters()" defaultValue="map" alwaysStopAt="false" />
+    <variable name="ELEMENT_TYPE" expression="iterableComponentType(MAP)" defaultValue="" alwaysStopAt="false" />
+    <variable name="ARR" expression="suggestVariableName()" defaultValue="" alwaysStopAt="false" />
+    <variable name="ELEMENT_T" expression="iterableComponentType(ARR)" defaultValue="" alwaysStopAt="false" />
+    <variable name="VAR" expression="suggestVariableName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="bfs" value="static class $CLASS_NAME${&#10;    int n;&#10;    int[] startPos;&#10;    int timeLimit; // 확산 시간 같은 변수있을 때 사용.&#10;    &#10;    Queue&lt;int[]&gt; queue;&#10;    int[][] map;&#10;    boolean[][] visited;&#10;&#10;    final int[][] direction4 = new int[][]{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};   // 12시부터 시계 방향&#10;    final int[][] direction8 = new int[][]{{-1, 0}, {-1, 1}, {0, 1}, {1, 1},    // 12시부터 시계 대각선 포함&#10;            {1, 0}, {1, -1}, {0, -1}, {-1, -1}};&#10;&#10;    public Sol(int n, int[] startPos, int timeLimit) {&#10;        this.n = n;&#10;        this.startPos = startPos;&#10;        this.timeLimit = timeLimit;&#10;        queue = new LinkedList&lt;&gt;();&#10;        map = new int[n][n];&#10;        visited = new boolean[n][n];&#10;        &#10;        visited[startPos[0]][startPos[1]] = true;&#10;        queue.add(new int[]{startPos[0], startPos[1]});&#10;        map[startPos[0]][startPos[1]] = timeLimit; // 1초마다 온도가 올라간다 이런 용도&#10;    }&#10;&#10;    public void bfs() {&#10;        int time = timeLimit;&#10;        while (!queue.isEmpty() &amp;&amp; time &gt; 0) {&#10;            int size = queue.size();&#10;            for (int i = 0; i &lt; size; i++) {&#10;                int[] poll = queue.poll();&#10;                for (int d = 0; d &lt; direction4.length; d++) {&#10;                    int ny = poll[0] + direction4[d][0];&#10;                    int nx = poll[1] + direction4[d][1];&#10;                    if(ny &lt; 0 || ny &gt;= n || nx &lt; 0 || nx &gt;= n || visited[ny][nx]) continue;&#10;                    visited[ny][nx] = true;&#10;                    queue.add(new int[]{ny, nx});&#10;                    map[ny][nx] = time; // 초마다 온도가 올라간다 이런 용도&#10;                }&#10;            }&#10;            time--;&#10;        }&#10;    }&#10;}" description="BFS 문제 풀이용 코드 (4,8 방향, 시간 변수 있을 때 초마다 확산되는거)" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ptt" value="public static String makePattern(String s, int k) { // s : 검사할 단어 k : . 같은 단어에 섞인 문자를 다른 단어로 몇개 들어가는지  &#10;    String pattern = &quot;^&quot;; // 시작 알리는 패턴&#10;    for (int i = 0; i &lt; s.length(); i++) {&#10;        char c = s.charAt(i);&#10;        if(c == '.'){&#10;            pattern += &quot;[a-z]{1,&quot; + k + &quot;}&quot;;    // 영어 소문자를 1~k개 포함한다는 뜻 si.al =&gt; sibal sibbal 이런거  &#10;        }else pattern += c;&#10;    }&#10;    return pattern + &quot;$&quot;;   // 패턴 마지막&#10;}&#10;&#10;public static void filter(StringBuilder sb, String s) {&#10;    for (int i = 0; i &lt; s.length(); i++) sb.append('#');    // 해당 단어를 필터링&#10;    sb.append(' ');&#10;}" description="욕설, 스팸 필터링 정규식 사용해서 만들기" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="dfs" value="static class $CLASS_NAME${&#10;    int n;          // nCr에서 n (총 n개)&#10;    int r;          // nCr에서 r (n개에서 r개 선택하겠다..)&#10;    int[] arr;      // 어떤 로직 구현용&#10;    boolean[] visited;&#10;    long result = 0;&#10;&#10;    public Dfs(int n, int r, int[] arr) {&#10;        this.n = n;&#10;        this.r = r;&#10;        this.arr = arr;&#10;        visited = new boolean[n];&#10;    }&#10;&#10;    public void dfs(int depth, boolean[] visited, int[] arr) {&#10;        if (depth == r) {&#10;            // 최종 만들어진걸로 로직 구현&#10;            long sum = 1;&#10;            for (int i = 0; i &lt; visited.length; i++) {&#10;                if(visited[i]){&#10;                    sum *= arr[i];&#10;                }&#10;            }&#10;            result = Math.max(result, sum);&#10;            return;&#10;        }&#10;        for (int i = 0; i &lt; r; i++) {&#10;            if(visited[i]) continue;&#10;            visited[i] = true;  // visited는 조합용, 빼면 순열(완전 탐색)&#10;            arr[depth] = i;     // arr 같은걸로 여기 로직 구현&#10;            dfs(depth+1, visited, arr);&#10;            visited[i] = false;&#10;        }&#10;    }&#10;}" description="조건 수가 별로 없거나 완탐 or 조합용 DFS" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="bdd" value="@Nested&#10;@DisplayName(&quot;$METHOD_DESC$&quot;)&#10;class Describe_$METHOD_NAME$ {&#10;&#10;  @Nested&#10;  @DisplayName(&quot;$CONTEXT_DESC$&quot;)&#10;  class Context_$CONTEXT_NAME${&#10;    &#10;    @Test&#10;    @DisplayName(&quot;$RETURN_DESC$&quot;)&#10;    void it_returns_$RETURN_NAME$() {&#10;      &#10;    }&#10;  }&#10;}" description="계층 구조 테스트" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD_DESC" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONTEXT_DESC" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONTEXT_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="RETURN_DESC" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="RETURN_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="pf" value="private final " description="private final" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="at" value="Assertions.assertThat($VAR$)" description="junit Assertions.assertThat" toReformat="false" toShortenFQNames="true">
+    <variable name="VAR" expression="typeOfVariable(VAR)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="atb" value="Assertions.assertThatThrownBy(() -&gt; )" description="Assertions.assertThatThrownBy" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="cache" value="public static final int $NAME$_LOWER_BOUND = $LOWER_BOUND$;&#10;public static final int $NAME$_UPPER_BOUND = $UPPER_BOUND$;&#10;private static final HashMap&lt;Integer, $CLASS_NAME$&gt; CACHE = new HashMap&lt;&gt;();&#10;private static final String INVALID_NUMBER_MESSAGE = &quot;$LOWER_BOUND$ ~ $UPPER_BOUND$ 사이의 값을 입력해주세요.&quot;;&#10;&#10;private final Integer number;&#10;&#10;static {&#10;    for (int i = $NAME$_LOWER_BOUND; i &lt;= $NAME$_UPPER_BOUND; i++) {&#10;        CACHE.put(i, new $CLASS_NAME$(i));&#10;    }&#10;}&#10;&#10;private $CLASS_NAME$(Integer number) {&#10;    this.number = number;&#10;}&#10;&#10;public static $CLASS_NAME$ valueOf(Integer number) {&#10;    validate(number);&#10;    return CACHE.get(number);&#10;}&#10;&#10;private static void validate(Integer number) {&#10;    if (number &lt; $NAME$_LOWER_BOUND || $NAME$_UPPER_BOUND &lt; number) {&#10;        throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);&#10;    }&#10;}" description="범위가 있는 원시타입 포장시 사용" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="capitalize(String)" defaultValue="" alwaysStopAt="true" />
+    <variable name="LOWER_BOUND" expression="typeOfVariable(VAR)" defaultValue="" alwaysStopAt="true" />
+    <variable name="UPPER_BOUND" expression="typeOfVariable(VAR)" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="csvtest" value="@DisplayName(&quot;$METHOD_NAME$&quot;)&#10;@ParameterizedTest(name = &quot;{index} : {0}을 넣으면 {1}을 반환한다.&quot;)&#10;@CsvSource({&quot;0, true&quot;, &quot;1, false&quot;})&#10;void $TEST_NAME$($PARAM_TYPE1$ $PARAM_VAR1$, $PARAM_TYPE2$ expected) {&#10;    //given&#10;    $CLASS_NAME$ $class_var$ = new $CLASS_NAME$();&#10;    //when&#10;    $PARAM_TYPE2$ actual = $class_var$.$METHOD_NAME$($PARAM_VAR1$);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="camelCase(String)" defaultValue="" alwaysStopAt="true" />
+    <variable name="TEST_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAM_TYPE1" expression="methodParameterTypes()" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAM_VAR1" expression="methodParameters()" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAM_TYPE2" expression="methodParameterTypes()" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_NAME" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
+    <variable name="class_var" expression="camelCase(String)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
