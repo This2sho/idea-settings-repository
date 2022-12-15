@@ -123,4 +123,47 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
+  <template name="iv" value="public class InputView {&#10;&#10;    private static final List&lt;String&gt; FEATURE_INPUTS = Arrays.asList(Constants.INPUT_MATCHING,&#10;        Constants.INPUT_SEARCH, Constants.INPUT_INIT, Constants.INPUT_QUIT);&#10;    private static final String ONLY_NUMBER_REGEX = &quot;^[0-9]+$&quot;;&#10;&#10;    public String readFeature() {&#10;        System.out.println(&quot;기능을 선택하세요.\n&quot; +&#10;            &quot;1. 페어 매칭\n&quot; +&#10;            &quot;2. 페어 조회\n&quot; +&#10;            &quot;3. 페어 초기화\n&quot; +&#10;            &quot;Q. 종료&quot;);&#10;        String input = Console.readLine();&#10;        validateFeature(input);&#10;        return input;&#10;    }&#10;&#10;    private void validateFeature(String input) {&#10;        if (!FEATURE_INPUTS.contains(input)) {&#10;            throw new IllegalArgumentException(&quot;잘못된 기능 번호입니다.&quot;);&#10;        }&#10;    }&#10;}" description="input view" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="en" value="public enum Menu {&#10;    PAIR_MATCHING(Constants.INPUT_MATCHING, new PairMatchingController()),&#10;    PAIR_RETRIEVE(Constants.INPUT_SEARCH, new PairRetrieveController()),&#10;    PAIR_INITIALIZATION(Constants.INPUT_INIT, new PairInitializationController()),&#10;    QUIT(Constants.INPUT_QUIT, null);&#10;&#10;    private final String inputNumber;&#10;    private final MenuActionController menuActionController;&#10;&#10;    Menu(String inputNumber, MenuActionController menuActionController) {&#10;        this.inputNumber = inputNumber;&#10;        this.menuActionController = menuActionController;&#10;    }&#10;&#10;    public static Menu findByMenuNumber(String menuNumber) {&#10;        return Arrays.stream(values())&#10;            .filter(menu -&gt; menu.inputNumber.equals(menuNumber))&#10;            .findAny()&#10;            .orElseThrow(() -&gt; new IllegalArgumentException(&quot;잘못된 메뉴 번호입니다.&quot;));&#10;    }&#10;&#10;    public boolean run() {&#10;        if (this == Menu.QUIT) {&#10;            return false;&#10;        }&#10;        menuActionController.run();&#10;        return true;&#10;    }&#10;}" description="enum 클래스 예시(menu)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="rep" value="public class $CLASS_TYPE$Repository {&#10;&#10;&#9;private static final Map&lt;String, $CLASS_TYPE$&gt; store = new HashMap&lt;&gt;();&#10;&#10;&#9;public void save(String id, $CLASS_TYPE$ value) {&#10;&#9;&#9;storage.put(id, value);&#10;&#9;}&#10;&#10;&#9;public $CLASS_TYPE$ findById(String id) {&#10;    &#9;return store.get(id);&#10;&#9;}&#10;&#10;&#9;public List&lt;$CLASS_TYPE$&gt; findAll() {&#10;    &#9;return new ArrayList&lt;&gt;(store.values());&#10;&#9;}&#10;&#10;   public void clearStore() {&#10;  &#9;  store.clear();&#10;&#9;}&#10;}" description="repository crud" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_TYPE" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ser" value="public class $CLASS_TYPE$Service {&#10;&#10;&#9;private static final $CLASS_TYPE$Repository $CLASS_CAMEL$Repoistory = new $CLASS_TYPE$Repository;&#10;}" description="service 기본" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_TYPE" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_CAMEL" expression="camelCase(String)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ov" value="public class OutputView {&#10;    public void printResult() {&#10;    &#10;    }&#10;&#10;    public void printNewLine() {&#10;        System.out.println();&#10;    }&#10;&#10;    public void printErrorMessage(String errorMessage) {&#10;        final String ERROR_LOG_PREFIX = &quot;[ERROR] &quot;;&#10;        System.out.println(ERROR_LOG_PREFIX + errorMessage);&#10;    }&#10;}" description="outputview 기본" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="cons" value="public class Constants {&#10;&#10;    public static final String UP = &quot;U&quot;;&#10;    public static final String DOWN = &quot;D&quot;;&#10;&#10;    public static final String START_MESSAGE = &quot;다리 건너기 게임을 시작합니다.&quot;;&#10;&#10;    public static final String INPUT_BRIDGE_SIZE = &quot;다리의 길이를 입력해주세요.&quot;;&#10;    public static final String INPUT_MOVING = &quot;이동할 칸을 선택해주세요. (위: U, 아래: D)&quot;;&#10;    public static final String INPUT_GAME_COMMAND = &quot;게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)&quot;;&#10;&#10;    public static final String RETRY = &quot;R&quot;;&#10;    public static final String QUIT = &quot;Q&quot;;&#10;&#10;    public static final String OUTPUT_GAME_RESULT = &quot;최종 게임 결과&quot;;&#10;    public static final String OUTPUT_SUCCESS_FAIL = &quot;게임 성공 여부: %s\n&quot;;&#10;    public static final String OUTPUT_GAME_ATTEMPTS = &quot;총 시도한 횟수: %d&quot;;&#10;}" description="상수 기본 정의" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="em" value="public class ErrorMessages {&#10;&#10;    public static final String INVALID_NUMBER = &quot;숫자만 입력이 가능합니다.&quot;;&#10;}" description="에러 메시지 기본 정의" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="cont" value="public class MainController {&#10;&#10;    private final InputView inputView;&#10;    private final OutputView outputView;&#10;&#10;    public MainController() {&#10;        this.inputView = new InputView();&#10;        this.outputView = new OutputView();&#10;    }&#10;}" description="컨트롤러 기본 정의" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
 </templateSet>
