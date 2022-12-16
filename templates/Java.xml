@@ -172,4 +172,9 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
+  <template name="pramtest" value="@ParameterizedTest(name = &quot;{index} : 로또 번호 비교 테스트 (비교 결과 : {1})&quot;)&#10;@MethodSource(&quot;parametersProvider&quot;)&#10;void 로또_비교_테스트(List&lt;Integer&gt; userNumbers, int expected) {&#10;    //given&#10;    Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));&#10;    Lotto userLotto = new Lotto(userNumbers);&#10;    //when&#10;    int actual = userLotto.compare(winningLotto);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}&#10;&#10;static Stream&lt;Arguments&gt; parametersProvider() {&#10;    return Stream.of(&#10;        arguments(List.of(1, 2, 3, 4, 5, 6), 6),&#10;        arguments(List.of(11, 12, 13, 14, 15, 6), 1),&#10;        arguments(List.of(11, 12, 13, 14, 15, 16), 0)&#10;    );&#10;}" description="parameter로 객체나 리스트 넣을 때 사용" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
 </templateSet>
