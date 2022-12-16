@@ -146,7 +146,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="ov" value="public class OutputView {&#10;    public void printResult() {&#10;    &#10;    }&#10;&#10;    public void printNewLine() {&#10;        System.out.println();&#10;    }&#10;&#10;    public void printErrorMessage(String errorMessage) {&#10;        final String ERROR_LOG_PREFIX = &quot;[ERROR] &quot;;&#10;        System.out.println(ERROR_LOG_PREFIX + errorMessage);&#10;    }&#10;}" description="outputview 기본" toReformat="false" toShortenFQNames="true">
+  <template name="ov" value="public class OutputView {&#10;    public void printResult() {&#10;    &#10;    }&#10;&#10;    public void printNewLine() {&#10;        System.out.println();&#10;    }&#10;&#10;    public void printError(String errorMessage) {&#10;        final String ERROR_LOG_PREFIX = &quot;[ERROR] &quot;;&#10;        System.out.println(ERROR_LOG_PREFIX + errorMessage);&#10;    }&#10;}" description="outputview 기본" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
