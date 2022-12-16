@@ -133,7 +133,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="rep" value="public class $CLASS_TYPE$Repository {&#10;&#10;&#9;private static final Map&lt;String, $CLASS_TYPE$&gt; store = new HashMap&lt;&gt;();&#10;&#10;&#9;public void save(String id, $CLASS_TYPE$ value) {&#10;&#9;&#9;storage.put(id, value);&#10;&#9;}&#10;&#10;&#9;public $CLASS_TYPE$ findById(String id) {&#10;    &#9;return store.get(id);&#10;&#9;}&#10;&#10;&#9;public List&lt;$CLASS_TYPE$&gt; findAll() {&#10;    &#9;return new ArrayList&lt;&gt;(store.values());&#10;&#9;}&#10;&#10;   public void clearStore() {&#10;  &#9;  store.clear();&#10;&#9;}&#10;}" description="repository crud" toReformat="false" toShortenFQNames="true">
+  <template name="rep" value="public class $CLASS_TYPE$Repository {&#10;&#10;&#9;private static final Map&lt;String, $CLASS_TYPE$&gt; store = new HashMap&lt;&gt;();&#10;&#10;&#9;public void save(String id, $CLASS_TYPE$ value) {&#10;&#9;&#9;store.put(id, value);&#10;&#9;}&#10;&#10;&#9;public $CLASS_TYPE$ findById(String id) {&#10;    &#9;return store.get(id);&#10;&#9;}&#10;&#10;&#9;public List&lt;$CLASS_TYPE$&gt; findAll() {&#10;    &#9;return new ArrayList&lt;&gt;(store.values());&#10;&#9;}&#10;&#10;   public void clearStore() {&#10;  &#9;  store.clear();&#10;&#9;}&#10;}" description="repository crud" toReformat="false" toShortenFQNames="true">
     <variable name="CLASS_TYPE" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
