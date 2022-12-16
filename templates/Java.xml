@@ -50,7 +50,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="bdd" value="@Nested&#10;@DisplayName(&quot;$METHOD_DESC$&quot;)&#10;class Describe_$METHOD_NAME$ {&#10;&#10;  @Nested&#10;  @DisplayName(&quot;$CONTEXT_DESC$&quot;)&#10;  class Context_$CONTEXT_NAME${&#10;    &#10;    @Test&#10;    @DisplayName(&quot;$RETURN_DESC$&quot;)&#10;    void it_returns_$RETURN_NAME$() {&#10;      &#10;    }&#10;  }&#10;}" description="계층 구조 테스트" toReformat="true" toShortenFQNames="true">
+  <template name="testbdd" value="@Nested&#10;@DisplayName(&quot;$METHOD_DESC$&quot;)&#10;class Describe_$METHOD_NAME$ {&#10;&#10;  @Nested&#10;  @DisplayName(&quot;$CONTEXT_DESC$&quot;)&#10;  class Context_$CONTEXT_NAME${&#10;    &#10;    @Test&#10;    @DisplayName(&quot;$RETURN_DESC$&quot;)&#10;    void it_returns_$RETURN_NAME$() {&#10;      &#10;    }&#10;  }&#10;}" description="계층 구조 테스트" toReformat="true" toShortenFQNames="true">
     <variable name="METHOD_DESC" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
     <variable name="METHOD_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
     <variable name="CONTEXT_DESC" expression="annotated(&quot;annotation qname&quot;)" defaultValue="" alwaysStopAt="true" />
@@ -86,7 +86,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="csvtest" value="@DisplayName(&quot;$METHOD_NAME$&quot;)&#10;@ParameterizedTest(name = &quot;{index} : {0}을 넣으면 {1}을 반환한다.&quot;)&#10;@CsvSource({&quot;0, true&quot;, &quot;1, false&quot;})&#10;void $TEST_NAME$($PARAM_TYPE1$ $PARAM_VAR1$, $PARAM_TYPE2$ expected) {&#10;    //given&#10;    $CLASS_NAME$ $class_var$ = new $CLASS_NAME$();&#10;    //when&#10;    $PARAM_TYPE2$ actual = $class_var$.$METHOD_NAME$($PARAM_VAR1$);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}" description="" toReformat="false" toShortenFQNames="true">
+  <template name="testcsv" value="@DisplayName(&quot;$METHOD_NAME$&quot;)&#10;@ParameterizedTest(name = &quot;{index} : {0}을 넣으면 {1}을 반환한다.&quot;)&#10;@CsvSource({&quot;0, true&quot;, &quot;1, false&quot;})&#10;void $TEST_NAME$($PARAM_TYPE1$ $PARAM_VAR1$, $PARAM_TYPE2$ expected) {&#10;    //given&#10;    $CLASS_NAME$ $class_var$ = new $CLASS_NAME$();&#10;    //when&#10;    $PARAM_TYPE2$ actual = $class_var$.$METHOD_NAME$($PARAM_VAR1$);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}" description="기본 인자를 파라미터로 넣을 때 사용" toReformat="false" toShortenFQNames="true">
     <variable name="METHOD_NAME" expression="camelCase(String)" defaultValue="" alwaysStopAt="true" />
     <variable name="TEST_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
     <variable name="PARAM_TYPE1" expression="methodParameterTypes()" defaultValue="" alwaysStopAt="true" />
@@ -172,7 +172,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="pramtest" value="@ParameterizedTest(name = &quot;{index} : 로또 번호 비교 테스트 (비교 결과 : {1})&quot;)&#10;@MethodSource(&quot;parametersProvider&quot;)&#10;void 로또_비교_테스트(List&lt;Integer&gt; userNumbers, int expected) {&#10;    //given&#10;    Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));&#10;    Lotto userLotto = new Lotto(userNumbers);&#10;    //when&#10;    int actual = userLotto.compare(winningLotto);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}&#10;&#10;static Stream&lt;Arguments&gt; parametersProvider() {&#10;    return Stream.of(&#10;        arguments(List.of(1, 2, 3, 4, 5, 6), 6),&#10;        arguments(List.of(11, 12, 13, 14, 15, 6), 1),&#10;        arguments(List.of(11, 12, 13, 14, 15, 16), 0)&#10;    );&#10;}" description="parameter로 객체나 리스트 넣을 때 사용" toReformat="false" toShortenFQNames="true">
+  <template name="testpram" value="@ParameterizedTest(name = &quot;{index} : 로또 번호 비교 테스트 (비교 결과 : {1})&quot;)&#10;@MethodSource(&quot;parametersProvider&quot;)&#10;void 로또_비교_테스트(List&lt;Integer&gt; userNumbers, int expected) {&#10;    //given&#10;    Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));&#10;    Lotto userLotto = new Lotto(userNumbers);&#10;    //when&#10;    int actual = userLotto.compare(winningLotto);&#10;    //then&#10;    assertThat(actual).isEqualTo(expected);&#10;}&#10;&#10;static Stream&lt;Arguments&gt; parametersProvider() {&#10;    return Stream.of(&#10;        arguments(List.of(1, 2, 3, 4, 5, 6), 6),&#10;        arguments(List.of(11, 12, 13, 14, 15, 6), 1),&#10;        arguments(List.of(11, 12, 13, 14, 15, 16), 0)&#10;    );&#10;}" description="parameter로 객체나 리스트 넣을 때 사용" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
