@@ -161,7 +161,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="cont" value="public class MainController {&#10;&#10;    private final InputView inputView;&#10;    private final OutputView outputView;&#10;&#10;    public MainController() {&#10;        this.inputView = new InputView();&#10;        this.outputView = new OutputView();&#10;    }&#10;}" description="컨트롤러 기본 정의" toReformat="false" toShortenFQNames="true">
+  <template name="cont" value="public abstract class Controller {&#10;    protected static final InputView inputView = new InputView();&#10;    protected static final OutputView outputView = new OutputView();&#10;&#10;    public &lt;T&gt; T repeat(Supplier&lt;T&gt; inputReader) {&#10;        try {&#10;            return inputReader.get();&#10;        } catch (IllegalArgumentException e) {&#10;            outputView.printError(e.getMessage());&#10;            return repeat(inputReader);&#10;        }&#10;    }&#10;&#10;    public abstract void run();&#10;}" description="컨트롤러 기본 정의 상속만 받아서 사용하면됨" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
