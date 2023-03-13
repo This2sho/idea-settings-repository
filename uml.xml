@@ -2,7 +2,7 @@
   <component name="UmlConfiguration">
     <option name="categories">
       <map>
-        <entry id="JAVA" categories="Show Usages" />
+        <entry id="JAVA" categories="Show Usages;Others" />
       </map>
     </option>
   </component>
