@@ -6,7 +6,7 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="brpsvm" value="public static void main(String[] args) throws IOException {&#10;    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&#10;    int N = Integer.parseInt(br.readLine());&#10;    $END$&#10;}" description="BufferedReader 포함 psvm" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+  <template name="brpsvm" value="public static void main(String[] args) throws IOException {&#10;    int N = InputReader.readInt();&#10;    $END$&#10;}&#10;&#10;public static class InputReader {&#10;&#10;    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&#10;&#10;    public static int readInt() throws IOException {&#10;        return Integer.parseInt(br.readLine());&#10;    }&#10;&#10;    public static int[] readArray() throws IOException {&#10;        StringTokenizer st = new StringTokenizer(br.readLine());&#10;        int[] result = new int[st.countTokens()];&#10;        for (int i = 0; st.hasMoreTokens(); i++) {&#10;            result[i] = Integer.parseInt(st.nextToken());&#10;        }&#10;        return result;&#10;    }&#10;}" description="BufferedReader 포함 psvm" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
